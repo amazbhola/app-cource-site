@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="http://127.0.0.1:5555/Schema%20Design.jpg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="http://127.0.0.1:5555/Schema%20Design.jpg" target="_blank"><img src="Schema Design.jpg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
