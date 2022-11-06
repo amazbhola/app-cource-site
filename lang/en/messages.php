@@ -12,5 +12,7 @@ return [
     'Interface' => 'INTERFACE',
     'Addons' => 'Addons',
     'Search_for' => 'Search for...',
-
+    'Category' => ' Category ',
+    'Categories' => ' Categories ',
+    'New' => 'New',
 ];

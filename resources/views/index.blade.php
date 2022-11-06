@@ -168,6 +168,9 @@
     </section>
     <!-- End Categories Section -->
 
+
+
+
     <!-- Start Popular Courses Section -->
     <section id="courses" class="mt-12">
         <div class="container mx-auto">
@@ -181,7 +184,7 @@
                 </div>
             </div>
 
-            <div id="popular-course">
+            <div id="popular-course" class="flex flex-row">
                 <div class="course-item group">
                     <div
                         class="border border-gray-100 shadow-sm rounded mr-3 transition hover:shadow-md group-hover:opacity-75">
@@ -494,7 +497,7 @@
                     </a>
                 </div>
             </div>
-            <div id="new-course">
+            <div id="new-course" class="flex flex-row">
                 <div class="course-item group">
                     <div
                         class="border border-gray-100 shadow-sm rounded mr-3 transition hover:shadow-md group-hover:opacity-75">

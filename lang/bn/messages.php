@@ -12,4 +12,7 @@ return [
     'Interface' => 'ইন্টারফেস',
     'Addons' => 'যোগ করতে সক্ষম',
     'Search_for' => 'সন্ধান করা ...',
+    'Category' => ' বিভাগ ',
+    'Categories' => ' বিভাগ সমুহ ',
+    'New' => 'নতুন',
 ];

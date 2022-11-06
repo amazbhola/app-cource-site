@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chapter extends Model
 {
-
+    use HasFactory;
     protected $table = 'chapters';
     public $timestamps = true;
     protected $fillable = array('course_id', 'title', 'slug', 'priority', 'created_by', 'updated_by', 'banner', 'description', 'meta_description', 'meta_keywords', 'status');
