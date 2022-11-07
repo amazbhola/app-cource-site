@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,9 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(CategoryDataTable $dataTable)
     {
-        return view('backend.pages.categories.index');
+        return $dataTable->render('backend.pages.categories.index');
     }
 
     /**

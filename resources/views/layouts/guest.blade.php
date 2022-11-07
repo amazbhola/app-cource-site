@@ -8,7 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Fonts -->
     @include('layouts.style')
+    <!-- Scripts -->
     <!-- Scripts -->
     @include('layouts.script')
 </head>

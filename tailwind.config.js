@@ -12,14 +12,7 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                poppins: [
-                    "Poppins",
-                    "sans-serif",
-                    ...defaultTheme.fontFamily.sans,
-                ],
-            },
-            container: {
-                padding: "2rem",
+                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
             },
         },
     },
