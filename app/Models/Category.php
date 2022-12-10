@@ -10,7 +10,8 @@ class Category extends Model
     use HasFactory;
     protected $table = 'categories';
     public $timestamps = true;
-    protected $fillable = array('parent_id');
+
+    protected $fillable = array('parent_id', 'name', 'slug', 'description', 'logo', 'priority', 'enable_homepage');
 
     public function parent_categories()
     {

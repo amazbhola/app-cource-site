@@ -4,11 +4,19 @@ namespace App\Http\Controllers\backend;
 
 use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryCreateRequest;
+use App\Models\Category;
+use App\Repositories\CategoryRepository;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-
+    public function __construct(private CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,16 +24,19 @@ class CategoryController extends Controller
      */
     public function index(CategoryDataTable $dataTable)
     {
+        // return $this->categoryRepository->get();
         return $dataTable->render('backend.pages.categories.index');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return mixed
      */
     public function create()
     {
+
+        return view('backend.pages.categories.form');
     }
 
     /**
@@ -33,18 +44,28 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CategoryCreateRequest $request)
     {
+        $category =  $this->categoryRepository->store($request->all());
+        if (!empty($category)) {
+            session()->flash('success', 'Category Create Successfully');
+            return redirect()->route('admin.category.index');
+        } else {
+            session()->flash('error', 'Something wrong');
+            return redirect()->route('admin.category.create');
+        }
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return Category|null
      */
-    public function show($id)
+    public function show($id): Category|null
     {
+        $category = $this->categoryRepository->show($id);
+        dd($category);
     }
 
     /**

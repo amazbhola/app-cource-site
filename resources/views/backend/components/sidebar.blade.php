@@ -38,7 +38,8 @@
                 <h6 class="collapse-header">
                     @lang('messages.Categories')
                 </h6>
-                <a class="collapse-item" href="buttons.html">@lang('messages.New') @lang('messages.Category')</a>
+                <a class="collapse-item" href="{{ route('admin.category.create') }}">@lang('messages.New')
+                    @lang('messages.Category')</a>
                 <a class="collapse-item" href="{{ route('admin.category.index') }}">@lang('messages.Category')</a>
             </div>
         </div>

@@ -1,0 +1,30 @@
+{
+    "name": "amaz/laravel-slug-genarator",
+    "description": "A unique Slug genarator for laravel 9+",
+    "type": "composer-plugin",
+    "license": "MIT",
+
+    "autoload": {
+        "psr-4": {
+            "Amaz\\LaravelSlugGenarator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "amazbhola",
+            "email": "amazingbhola@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Amaz\\LaravelSlugGenarator\\SlugServiceProvider"
+            ],
+            "aliases": {
+                "UniqueSlug": "Amaz\\LaravelSlugGenarator\\Facade"
+            }
+        }
+    }
+}

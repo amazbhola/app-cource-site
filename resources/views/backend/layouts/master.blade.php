@@ -55,6 +55,7 @@
                     </div>
 
                     {{-- @include('backend.components.page_heading') --}}
+                    @include('backend.components.massege')
                     @yield('admin_content')
                     <!-- Page Heading -->
                     <!-- Content Row -->
