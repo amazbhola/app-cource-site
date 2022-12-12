@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -33,12 +34,16 @@ class CategoryDataTable extends DataTable
             ->editColumn('updated_at', function (Category $category) {
                 return $category->updated_at->diffForHumans();
             })
+            ->editColumn('logo', function (Category $category) {
+                return '<img src="' . Storage::url($category->logo) . '" alt="" width="50">';
+                // return $category->updated_at->diffForHumans();
+            })
             ->editColumn('parent_id', function (Category $category) {
                 if (isset($category->parent->name)) {
                     return  '<a href="' . route('admin.category.destroy', $category->parent->id) . '">' . $category->parent->name . '</a>';
                 }
                 return '--';
-            })->rawColumns(['parent_id', 'action']);
+            })->rawColumns(['parent_id', 'action', 'logo']);
     }
 
     public function query(Category $model): QueryBuilder
@@ -72,6 +77,7 @@ class CategoryDataTable extends DataTable
             Column::make('DT_RowIndex')->title('Sl No')->searchable(false)->orderable(false),
             Column::make('name')->title('Category'),
             Column::make('parent_id')->title('Parent Name'),
+            Column::make('logo')->title('Logo'),
             Column::make('created_at')->title('Created'),
             Column::make('updated_at')->title('Last Update'),
             Column::make('action')

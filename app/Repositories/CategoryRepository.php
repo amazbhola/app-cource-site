@@ -6,6 +6,7 @@ use Akash\LaravelUniqueSlug\Facades\UniqueSlug;
 use App\Interfaces\CRUDInterface;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryRepository implements CRUDInterface
 {
@@ -33,6 +34,11 @@ class CategoryRepository implements CRUDInterface
     {
         if (empty($data['slug'])) {
             $data['slug'] = UniqueSlug::generate(Category::class, $data['name'], 'slug');
+        }
+
+        if (!empty($data['logo'])) {
+            $logoName = $data['slug'] . '-' . time() . '.' . $data['logo']->extension();
+            $data['logo'] = $data['logo']->storePubliclyAs('public', $logoName);
         }
         return Category::create($data);
     }

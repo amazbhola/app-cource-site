@@ -19,7 +19,14 @@
                 </select>
             </div>
             <div class="mb-3">
-                <input class="form-control" type="file" name="logo" id="">
+
+                <div class="col-md-3">
+                    <label for="file">Upload Image</label>
+                </div>
+                <div class="col-md-3">
+                    <input class="form-control" type="file" name="logo" id="logo">
+                </div>
+
             </div>
             <div class="mb-0"><label for="description">Description</label>
                 <textarea class="form-control" id="description" rows="3" name="description"></textarea>

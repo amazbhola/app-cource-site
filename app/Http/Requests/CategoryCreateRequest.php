@@ -28,6 +28,7 @@ class CategoryCreateRequest extends FormRequest
             'name' => 'required|max:100',
             'description' => 'nullable|string',
             'parent_id' => 'nullable|integer',
+            'logo' => 'nullable|image|max:2000',
 
         ];
     }
