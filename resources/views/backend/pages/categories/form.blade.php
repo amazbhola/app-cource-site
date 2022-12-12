@@ -7,16 +7,20 @@
         <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3"><label for="category_name">New Category</label>
-                <input class="form-control" id="category_name" name="name" type="text" placeholder="Category Name">
+                <label for="">Cateogry Name <span class="text-danger">*</span></label>
+                <input class="form-control" id="category_name" name="name" type="text" placeholder="Category Name"
+                    required>
             </div>
-            {{-- <div class="mb-3">
-                <select name="" id="">
-                    <option value="">Item One</option>
+            <div class="mb-3">
+                <label for="">Parent Category <span class="text-info">(Optional)</span></label><br>
+                <select name="parent_id" id="parent_id">
+                    <option value="">Select Parent Category</option>
+                    {!! $printableCategory !!}
                 </select>
             </div>
             <div class="mb-3">
                 <input class="form-control" type="file" name="logo" id="">
-            </div> --}}
+            </div>
             <div class="mb-0"><label for="description">Description</label>
                 <textarea class="form-control" id="description" rows="3" name="description"></textarea>
             </div>

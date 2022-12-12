@@ -18,7 +18,7 @@ class CategoryRepository implements CRUDInterface
     {
         $orderBy = empty($args['order_by']) ? 'id' : $args['order_by']; // column name
         $order = empty($args['order']) ? 'desc' : $args['order']; //asc, desc
-        $query = Category::orderBy($orderBy, $order);
+        $query = Category::orderBy($orderBy, $order)->with('parent');
         if (isset($args['is_query']) && $args['is_query']) {
             return $query;
         }
@@ -73,5 +73,27 @@ class CategoryRepository implements CRUDInterface
     public function edit(array $data, int $id)
     {
         # code...
+    }
+    /**
+     * Summary of printCategory
+     * @return string
+     */
+    public  function printCategory(?int $categoryId = null)
+    {
+        $html = '';
+        $printCategory = $this->getParentCategories(null);
+        foreach ($printCategory as $parent) {
+            $html .= '<option value="' . $parent->id . '">' . $parent->name . '</option>';
+            $childCategory = $this->getParentCategories($parent->id);
+            foreach ($childCategory as $child1) {
+                $html .= '<option value="' . $child1->id . '">&nbsp;&nbsp;&nbsp;&nbsp;--' . $child1->name . '</option>';
+            }
+        }
+        return $html;
+    }
+
+    private function getParentCategories(?int $parentId = null)
+    {
+        return Category::select('id', 'name')->where('parent_id', $parentId)->get();
     }
 }

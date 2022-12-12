@@ -32,7 +32,13 @@ class CategoryDataTable extends DataTable
             })
             ->editColumn('updated_at', function (Category $category) {
                 return $category->updated_at->diffForHumans();
-            });
+            })
+            ->editColumn('parent_id', function (Category $category) {
+                if (isset($category->parent->name)) {
+                    return  '<a href="' . route('admin.category.destroy', $category->parent->id) . '">' . $category->parent->name . '</a>';
+                }
+                return '--';
+            })->rawColumns(['parent_id', 'action']);
     }
 
     public function query(Category $model): QueryBuilder
@@ -65,6 +71,7 @@ class CategoryDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')->title('Sl No')->searchable(false)->orderable(false),
             Column::make('name')->title('Category'),
+            Column::make('parent_id')->title('Parent Name'),
             Column::make('created_at')->title('Created'),
             Column::make('updated_at')->title('Last Update'),
             Column::make('action')

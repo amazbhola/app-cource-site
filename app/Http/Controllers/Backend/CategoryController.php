@@ -36,12 +36,14 @@ class CategoryController extends Controller
     public function create()
     {
 
-        return view('backend.pages.categories.form');
+        return view('backend.pages.categories.form', [
+            'printableCategory' => $this->categoryRepository->printCategory()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @param Request $request
      * @return Response
      */
     public function store(CategoryCreateRequest $request)

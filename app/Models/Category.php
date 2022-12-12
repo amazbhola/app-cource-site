@@ -10,9 +10,19 @@ class Category extends Model
     use HasFactory;
     protected $table = 'categories';
     public $timestamps = true;
-
+    /**
+     * Summary of fillable
+     * @var mixed
+     */
     protected $fillable = array('parent_id', 'name', 'slug', 'description', 'logo', 'priority', 'enable_homepage');
-
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+    /**
+     * Summary of parent_categories
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function parent_categories()
     {
         return $this->belongsToMany('app/Models\Category', 'parent_id');
