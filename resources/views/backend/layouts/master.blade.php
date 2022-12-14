@@ -20,6 +20,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('backend/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('backend/css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -48,10 +49,7 @@
                         <h1 class="h3 mb-0 text-gray-800">
                             @yield('title')
                         </h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i>
-                            @yield('generate')
-                        </a>
+                        @yield('bradcrumb')
                     </div>
 
                     {{-- @include('backend.components.page_heading') --}}

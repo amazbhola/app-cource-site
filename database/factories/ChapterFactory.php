@@ -32,7 +32,7 @@ class ChapterFactory extends Factory
         return [
             'title' => fake()->sentence(10),
             'slug' => fake()->slug(),
-            'priority' => fake()->unique()->randomNumber(1, 100),
+            'priority' => fake()->randomNumber(1, 125),
             'course_id' => fake()->randomNumber(1, 20),
             'created_by' => fake()->randomNumber(1, 20),
             'updated_by' => fake()->randomNumber(1, 20),

@@ -32,6 +32,7 @@ class CategoryRepository implements CRUDInterface
      */
     public function store(array $data): Category|null
     {
+
         if (empty($data['slug'])) {
             $data['slug'] = UniqueSlug::generate(Category::class, $data['name'], 'slug');
         }
@@ -40,6 +41,8 @@ class CategoryRepository implements CRUDInterface
             $logoName = $data['slug'] . '-' . time() . '.' . $data['logo']->extension();
             $data['logo'] = $data['logo']->storePubliclyAs('public', $logoName);
         }
+        $data['enable_homepage'] = isset($data['enable_homepage']) ? 1 : 0;
+
         return Category::create($data);
     }
     /**
