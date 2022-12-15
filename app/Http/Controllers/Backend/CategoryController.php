@@ -7,9 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Models\Category;
 use App\Repositories\CategoryRepository;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Support\Renderable;
+
 
 class CategoryController extends Controller
 {
@@ -31,9 +30,9 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return mixed
+     * @return Renderable;
      */
-    public function create()
+    public function create(): Renderable
     {
 
         return view('backend.pages.categories.form', [
@@ -64,20 +63,28 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return Category|null
      */
-    public function show($id): Category|null
+    public function show($id)
     {
-        $category = $this->categoryRepository->show($id);
-        dd($category);
+        return $id;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     *
+     * @return Renderable
      */
-    public function edit($id)
+    public function edit(Category $category): Renderable
     {
+        // return view('backend.pages.categories.edit');
+        return view('backend.pages.categories.edit', [
+            'category' => $category,
+            'printableCategory' => $this->categoryRepository->printCategory($category->id)
+        ]);
+        // return redirect()->route('admin.category.edit', [
+        //     'category' => $category,
+        //     'printableCategory' => $this->categoryRepository->printCategory()
+        // ]);
     }
 
     /**

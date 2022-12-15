@@ -47,55 +47,10 @@
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link  small text-primary "
-                href="{{ route(Route::currentRouteName()) }}?lang={{ request()->lang == 'bn' ? 'en' : 'bn' }}">
+                href="{{ url()->current() }}?lang={{ request()->lang == 'bn' ? 'en' : 'bn' }}">
                 <i class="fas fa-language text-primary mr-2"></i>
-                {{ request()->lang == 'bn' ? 'EN' : 'বাংলা' }}
-                <!-- Counter - Alerts -->
-                {{-- <span class="badge badge-danger badge-counter">EN</span> --}}
-            </a>
-            <!-- Dropdown - Alerts -->
-            {{-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">
-                    Language
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-primary">
-                            <i class="fas fa-file-alt text-white"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">December 12, 2019</div>
-                        <span class="font-weight-bold">A new monthly report is ready to
-                            download!</span>
-                    </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-success">
-                            <i class="fas fa-donate text-white"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">December 7, 2019</div>
-                        $290.29 has been deposited into your account!
-                    </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                    <div class="mr-3">
-                        <div class="icon-circle bg-warning">
-                            <i class="fas fa-exclamation-triangle text-white"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="small text-gray-500">December 2, 2019</div>
-                        Spending Alert: We've noticed unusually high spending for your account.
-                    </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All
-                    Alerts</a>
-            </div> --}}
+                {{ request()->lang == 'bn' ? 'EN' : 'বাংলা' }} </a>
+
         </li>
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"

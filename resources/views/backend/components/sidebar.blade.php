@@ -34,17 +34,17 @@
             <span>@lang('messages.Categories')</span>
         </a>
         <div id="collapseTwo"
-            class="collapse {{ Route::is('admin.category.create') || Route::is('admin.category.index') ? 'show' : '' }}"
+            class="collapse {{ Route::is('admin.category.create') || Route::is('admin.category.index') || Route::is('admin.category.edit') ? 'show' : '' }}"
             aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">
                     @lang('messages.Categories')
                 </h6>
+                <a class="collapse-item {{ Route::is('admin.category.index') ? 'active' : '' }}"
+                    href="{{ route('admin.category.index') }}">@lang('messages.Categories')</a>
                 <a class="collapse-item {{ Route::is('admin.category.create') ? 'active' : '' }}"
                     href="{{ route('admin.category.create') }}">@lang('messages.New')
                     @lang('messages.Category')</a>
-                <a class="collapse-item {{ Route::is('admin.category.index') ? 'active' : '' }}"
-                    href="{{ route('admin.category.index') }}">@lang('messages.Category')</a>
             </div>
         </div>
     </li>

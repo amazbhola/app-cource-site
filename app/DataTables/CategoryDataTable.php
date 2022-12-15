@@ -35,7 +35,7 @@ class CategoryDataTable extends DataTable
                 return $category->updated_at->diffForHumans();
             })
             ->editColumn('logo', function (Category $category) {
-                return '<img src="' . Storage::url($category->logo) . '" alt="" width="50">';
+                return '<img src="' . Storage::url($category->logo) . '" alt="" width="100">';
                 // return $category->updated_at->diffForHumans();
             })
             ->editColumn('parent_id', function (Category $category) {

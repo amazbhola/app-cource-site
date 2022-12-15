@@ -92,10 +92,12 @@ class CategoryRepository implements CRUDInterface
         $html = '';
         $printCategory = $this->getParentCategories(null);
         foreach ($printCategory as $parent) {
-            $html .= '<option value="' . $parent->id . '">' . $parent->name . '</option>';
+            $selected = $parent->id == $categoryId ? 'selected' : '';
+            $html .= '<option ' . $selected . '  value="' . $parent->id . '">' . $parent->name . '</option>';
             $childCategory = $this->getParentCategories($parent->id);
             foreach ($childCategory as $child1) {
-                $html .= '<option value="' . $child1->id . '">&nbsp;&nbsp;&nbsp;&nbsp;--' . $child1->name . '</option>';
+                $selected = $child1->id == $categoryId ? 'selected' : '';
+                $html .= '<option ' . $selected . '  value="' . $child1->id . '">&nbsp;&nbsp;&nbsp;&nbsp;--' . $child1->name . '</option>';
             }
         }
         return $html;
