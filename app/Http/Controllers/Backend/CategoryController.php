@@ -9,7 +9,6 @@ use App\Models\Category;
 use App\Repositories\CategoryRepository;
 use Illuminate\Contracts\Support\Renderable;
 
-
 class CategoryController extends Controller
 {
     public function __construct(private CategoryRepository $categoryRepository)
@@ -76,34 +75,39 @@ class CategoryController extends Controller
      */
     public function edit(Category $category): Renderable
     {
-        // return view('backend.pages.categories.edit');
+
         return view('backend.pages.categories.edit', [
             'category' => $category,
             'printableCategory' => $this->categoryRepository->printCategory($category->id)
         ]);
-        // return redirect()->route('admin.category.edit', [
-        //     'category' => $category,
-        //     'printableCategory' => $this->categoryRepository->printCategory()
-        // ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function update($id)
+
+    public function update(CategoryCreateRequest $request, Category $category)
     {
+
+        $categoryUpdate =  $this->categoryRepository->update($request->except('_token', '_method'), $category->id);
+        if (!empty($categoryUpdate)) {
+            session()->flash('success', 'Category update Successfully');
+            return redirect()->route('admin.category.index');
+        } else {
+            session()->flash('error', 'Something wrong');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Category $category
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
+        if ($this->categoryRepository->delete($category)) {
+            session()->flash('success', 'Category Delete Successfully');
+            return redirect()->route('admin.category.index');
+        } else {
+            session()->flash('error', 'Something wrong');
+        }
     }
 }

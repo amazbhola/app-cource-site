@@ -47,7 +47,7 @@
         <!-- Nav Item - Alerts -->
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link  small text-primary "
-                href="{{ url()->current() }}?lang={{ request()->lang == 'bn' ? 'en' : 'bn' }}">
+                href="{{ url()->full() }}?lang={{ request()->lang == 'bn' ? 'en' : 'bn' }}">
                 <i class="fas fa-language text-primary mr-2"></i>
                 {{ request()->lang == 'bn' ? 'EN' : 'বাংলা' }} </a>
 
@@ -183,7 +183,7 @@
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ route('dashboard') }}">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                     Profile
                 </a>

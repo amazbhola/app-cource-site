@@ -7,8 +7,9 @@
 @endsection
 @section('admin_content')
     <div class="card p-4">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <label for="category_name">Update Category</label>
             <div class="row">
                 <div class="col-12 col-md-6">
@@ -19,6 +20,7 @@
                 <div class="col-12 col-md-6">
                     <label for="">Parent Category <span class="text-info">(Optional)</span></label><br>
                     <select name="parent_id" id="parent_id">
+                        <option value="">Select Parent Category</option>
                         {!! $printableCategory !!}
                     </select>
                 </div>

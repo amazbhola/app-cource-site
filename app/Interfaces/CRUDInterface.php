@@ -19,30 +19,20 @@ interface CRUDInterface
      * @return Category|null
      */
     function store(array $data): Category|null;
-    /**
-     * Summary of update
-     * @param array $data
-     * @param int $id
-     * @return Category|null
-     */
-    function update(array $data, int $id): Category|null;
+
+    function update(array $data, int $id);
     /**
      * Summary of delete
      * @param int $id
      * @return void
      */
     function delete(int $id);
-    /**
-     * Summary of show
-     * @param int $id
-     * @return Category|Collection
-     */
-    function show(int $id): Category|Collection;
+
+    function show(int $id);
     /**
      * Summary of edit
      * @param array $data
      * @param int $id
      * @return void
      */
-    function edit(array $data, int $id);
 }

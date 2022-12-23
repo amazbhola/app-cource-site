@@ -4,7 +4,7 @@
             <div class="flex justify-between">
                 <div class="flex justify-center items-center">
                     <div>
-                        <a href="#">
+                        <a href="">
                             <img src="{{ asset('images/logo.png') }}" alt="" class="w-36">
                         </a>
                     </div>
@@ -106,20 +106,43 @@
                         </li>
                     </ul>
                     <div class="hidden md:block -mt-3 mx-3 group">
-                        @guest
+                        @auth
+
+                            <div class="hidden md:block ml-8 group relative">
+                                <a href="#"
+                                    class="text-xl text-gray-500 group-hover:opacity-75 rounded-full h-5 w-5 shadow py-1.5 px-2.5">
+                                    <i class="fa-solid fa-user"></i>
+                                </a>
+
+                                <div class="bg-white hidden absolute group-hover:block min-w-[200px]">
+                                    <ul class="list-none">
+                                        <li>
+                                            <a href="{{ route('dashboard') }}"
+                                                class="block bg-white hover:bg-slate-50 py-2 px-8 hover:text-red-500">
+                                                Profile
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <form action="{{ route('logout') }}" method="post"
+                                                class="block bg-white hover:bg-slate-50 py-2 px-8 hover:text-red-500">
+                                                @csrf
+                                                <button type="submit">
+                                                    Logout
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @else
                             <a href="{{ route('login') }}"
                                 class="text-xl text-gray-500 group-hover:opacity-75 rounded-full h-5 w-5 shadow py-1.5 px-2.5">
                                 Login
                             </a>
                             <a href="{{ route('register') }}"
                                 class="text-xl text-gray-500 group-hover:opacity-75 rounded-full h-5 w-5 shadow py-1.5 px-2.5">
-                                Register
-                            </a>
-                        @endguest
-                        @auth
-                            <a href="#"
-                                class="text-xl text-gray-500 group-hover:opacity-75 rounded-full h-5 w-5 shadow py-1.5 px-2.5">
-                                <i class="fa-solid fa-user"></i>
+                                Signup
                             </a>
                         @endauth
 

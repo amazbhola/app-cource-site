@@ -33,56 +33,42 @@ class CategoryRepository implements CRUDInterface
     public function store(array $data): Category|null
     {
 
-        if (empty($data['slug'])) {
-            $data['slug'] = UniqueSlug::generate(Category::class, $data['name'], 'slug');
-        }
-
-        if (!empty($data['logo'])) {
-            $logoName = $data['slug'] . '-' . time() . '.' . $data['logo']->extension();
-            $data['logo'] = $data['logo']->storePubliclyAs('public', $logoName);
-        }
-        $data['enable_homepage'] = isset($data['enable_homepage']) ? 1 : 0;
+        $data = $this->CategoryDataProcessForDb($data);
 
         return Category::create($data);
     }
-    /**
-     * Summary of show
-     * @param int $id
-     * @return Category|Collection
-     */
-    public function show(int $id): Category|Collection
+
+    public function show(int $id)
     {
         return Category::find($id);
     }
-    /**
-     * Summary of update
-     * @param array $data
-     * @param int $id
-     * @return Category|null
-     */
-    public function update(array $data, int $id): Category|null
+
+    public function update(array $data, int|Category $id)
     {
-        return Category::find($id);
+        $category = $this->categoryInstance($id);
+
+        $data = $this->CategoryDataProcessForDb($data);
+
+        $category->update($data);
+        return $this->show($id);
     }
     /**
      * Summary of delete
      * @param int $id
      * @return mixed
      */
-    public function delete(int $id)
+    public function delete(int|Category $id)
     {
-        return Category::find($id);
+        $category = $this->categoryInstance($id);
+        if (!empty($category)) {
+            $this->deleteLogo($category);
+            $category->delete();
+            return $category;
+        }
+
+        return null;
     }
-    /**
-     * Summary of edit
-     * @param array $data
-     * @param int $id
-     * @return void
-     */
-    public function edit(array $data, int $id)
-    {
-        # code...
-    }
+
     /**
      * Summary of printCategory
      * @return string
@@ -90,7 +76,7 @@ class CategoryRepository implements CRUDInterface
     public  function printCategory(?int $categoryId = null)
     {
         $html = '';
-        $printCategory = $this->getParentCategories(null);
+        $printCategory = $this->getParentCategories();
         foreach ($printCategory as $parent) {
             $selected = $parent->id == $categoryId ? 'selected' : '';
             $html .= '<option ' . $selected . '  value="' . $parent->id . '">' . $parent->name . '</option>';
@@ -105,6 +91,34 @@ class CategoryRepository implements CRUDInterface
 
     private function getParentCategories(?int $parentId = null)
     {
-        return Category::select('id', 'name')->where('parent_id', $parentId)->get();
+        return Category::select('id', 'name')
+            ->where('parent_id', $parentId)
+            ->get();
+    }
+    private function deleteLogo(Category $category)
+    {
+        if (Storage::exists($category->logo)) {
+            Storage::delete($category->logo);
+        }
+    }
+    private function categoryInstance(int|Category $category): Category|null
+    {
+        if (!$category instanceof Category) {
+            $category = $this->show($category);
+        }
+        return $category;
+    }
+    private function CategoryDataProcessForDb(array $data, int|Category $id = null)
+    {
+        if (empty($data['slug'])) {
+            $data['slug'] = UniqueSlug::generate(Category::class, $data['name'], 'slug');
+        }
+
+        if (!empty($data['logo'])) {
+            $logoName = $data['slug'] . '-' . time() . '.' . $data['logo']->extension();
+            $data['logo'] = $data['logo']->storePubliclyAs('public', $logoName);
+        }
+        $data['enable_homepage'] = isset($data['enable_homepage']) ? 1 : 0;
+        return $data;
     }
 }

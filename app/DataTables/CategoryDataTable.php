@@ -25,7 +25,29 @@ class CategoryDataTable extends DataTable
             ->addColumn('action', function (Category $category) {
                 $html = '<a class="btn btn-link text-primary" href="' . route('admin.category.show', $category->slug) . '">View</a>';
                 $html .= '<a class="btn btn-link text-primary" href="' . route('admin.category.edit', $category->id) . '"><i class="fa fa-pencil"></i></a>';
-                $html .= '<a class="btn btn-link text-danger" href="' . route('admin.category.destroy', $category->id) . '"><i class="fa fa-trash"></i></a>';
+                $html .= '<button class="btn btn-link text-danger" data-toggle="modal" data-target="#exampleModalCenter' . $category->id . '" ><i class="fa fa-trash"></i></button>';
+                $html .= '<div class="modal fade" id="exampleModalCenter' . $category->id . '" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle"> Delete ' . $category->name . ' Category</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are You Sure Delete This ' . $category->name . ' Category ?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <form action="' . route('admin.category.destroy', $category->id) . '" method="POST">
+                      ' . csrf_field() . method_field('DELETE') . '
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>';
                 return $html;
             })
             ->editColumn('created_at', function (Category $category) {
