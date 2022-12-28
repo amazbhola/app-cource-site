@@ -4,7 +4,7 @@
             <div class="flex justify-between">
                 <div class="flex justify-center items-center">
                     <div>
-                        <a href="">
+                        <a href="{{ url('index') }}">
                             <img src="{{ asset('images/logo.png') }}" alt="" class="w-36">
                         </a>
                     </div>

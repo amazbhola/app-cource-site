@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable, SoftDeletes;
     protected $table = 'users';
     public $timestamps = true;
 
-    use SoftDeletes;
+
 
     protected $dates = ['deleted_at'];
     protected $fillable = array('name', 'email', 'password');

@@ -11,5 +11,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('index');
-Route::resource('category', CategoryController::class);
+Route::middleware(['admin'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::resource('category', CategoryController::class);
+});
